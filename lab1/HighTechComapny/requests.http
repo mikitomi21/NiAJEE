@@ -1,5 +1,5 @@
-GET http://localhost:9080/api/employees
+GET http://localhost:9080/HighTechComapny/api/employees
 
 ###
 
-GET http://localhost:9080/api/employees/1
+GET http://localhost:9080/HighTechComapny/

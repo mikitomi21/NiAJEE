@@ -48,6 +48,9 @@ public class ApiServlet extends HttpServlet {
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         String path = req.getPathInfo();
         String servletPath = req.getServletPath();
+
+        System.out.println("siema");
+
         if (Paths.API.equals(servletPath)) {
             if (path.matches(Patterns.EMPLOYEES.pattern())) {
                 resp.setContentType("application/json");
