@@ -24,7 +24,7 @@ import java.util.regex.Matcher;
 
 public class ApiServlet extends HttpServlet {
 
-    private EmployeeSimpleController employeeController;
+    private EmployeeController employeeController;
 
     public static final class Paths {
         public static final String API = "/api";
@@ -38,10 +38,12 @@ public class ApiServlet extends HttpServlet {
     }
 
     private final Jsonb jsonb = JsonbBuilder.create();
+
     @Override
     public void init() throws ServletException {
         super.init();
         employeeController = (EmployeeSimpleController) getServletContext().getAttribute("employeeController");
+        System.out.println("INIT");
     }
 
     @Override
@@ -49,7 +51,10 @@ public class ApiServlet extends HttpServlet {
         String path = req.getPathInfo();
         String servletPath = req.getServletPath();
 
-        System.out.println("siema");
+        System.out.println("GET");
+        System.out.println("path: " + path);
+        System.out.println("servletPath: " + servletPath);
+
 
         if (Paths.API.equals(servletPath)) {
             if (path.matches(Patterns.EMPLOYEES.pattern())) {

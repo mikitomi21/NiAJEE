@@ -11,9 +11,11 @@ import jakarta.servlet.ServletContextListener;
 public class CreateServices implements ServletContextListener {
     @Override
     public void contextInitialized(ServletContextEvent event) {
+        System.out.println("Creating services");
         DataStore dataSource = (DataStore) event.getServletContext().getAttribute("datasource");
 
         EmployeeRepository employeeRepository = new EmployeeInMemoryRepository(dataSource);
+
         event.getServletContext().setAttribute("employeeService", new EmployeeService(employeeRepository));
     }
 

@@ -1,4 +1,5 @@
-GET http://localhost:9080/HighTechComapny/api/employees
+GET http://localhost:9080/HighTechComapny-1.0-SNAPSHOT/api/employees
+
 
 ###
 

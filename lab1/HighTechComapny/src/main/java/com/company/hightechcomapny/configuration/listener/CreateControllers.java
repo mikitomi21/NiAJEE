@@ -11,6 +11,7 @@ public class CreateControllers implements ServletContextListener {
 
     @Override
     public void contextInitialized(ServletContextEvent event) {
+        System.out.println("Creating controllers");
         EmployeeService employeeService = (EmployeeService) event.getServletContext().getAttribute("employeeService");
         event.getServletContext().setAttribute("employeeController", new EmployeeSimpleController(
                 employeeService,
