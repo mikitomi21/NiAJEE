@@ -28,6 +28,7 @@ public class EmployeeService {
     }
 
     public void create(Employee employee) {
+        System.out.println(employee);
         employeeRepository.create(employee);
     }
 

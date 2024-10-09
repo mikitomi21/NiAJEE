@@ -17,7 +17,7 @@ public class InitializedData implements ServletContextListener  {
 
     @Override
     public void contextInitialized(ServletContextEvent event) {
-        employeeService = (EmployeeService) event.getServletContext().getAttribute("characterService");
+        employeeService = (EmployeeService) event.getServletContext().getAttribute("employeeService");
 //        taskService = (TaskService) event.getServletContext().getAttribute("userService");
 //        projectService = (ProjectService) event.getServletContext().getAttribute("professionService");
         init();
@@ -26,25 +26,25 @@ public class InitializedData implements ServletContextListener  {
     @SneakyThrows
     private void init() {
         Employee emp1 = Employee.builder()
-                .id(UUID.fromString("81e1c2a9-7f57-439b-b53d-6db88b07m000"))
+                .id(UUID.fromString("81e1c2a9-7f57-439b-b53d-6db88b07a000"))
                 .name("Jakub")
                 .salary(10000)
                 .picture(getResourceAsByteArray("/images/jakub.jpg"))
                 .build();
         Employee emp2 = Employee.builder()
-                .id(UUID.fromString("81e1c2a9-7f57-439b-b53d-6db88b07m111"))
-                .name("Michał")
+                .id(UUID.fromString("81e1c2a9-7f57-439b-b53d-6db88b07a111"))
+                .name("Michal")
                 .salary(35000)
                 .picture(getResourceAsByteArray("/images/michal.jpg"))
                 .build();
         Employee emp3 = Employee.builder()
-                .id(UUID.fromString("81e1c2a9-7f57-439b-b53d-6db88b07m222"))
+                .id(UUID.fromString("81e1c2a9-7f57-439b-b53d-6db88b07a222"))
                 .name("Katarzyna")
                 .salary(200)
                 .picture(getResourceAsByteArray("/images/katarzyna.jpg"))
                 .build();
         Employee emp4 = Employee.builder()
-                .id(UUID.fromString("81e1c2a9-7f57-439b-b53d-6db88b07m333"))
+                .id(UUID.fromString("81e1c2a9-7f57-439b-b53d-6db88b07a333"))
                 .name("Basia")
                 .salary(6969)
                 .picture(getResourceAsByteArray("/images/basia.jpg"))

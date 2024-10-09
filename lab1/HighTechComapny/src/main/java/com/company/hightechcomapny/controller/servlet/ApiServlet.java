@@ -31,7 +31,7 @@ public class ApiServlet extends HttpServlet {
     }
 
     public static final class Patterns {
-        private static final Pattern UUID = Pattern.compile("/[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}");
+        private static final Pattern UUID = Pattern.compile("[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}");
         private static final Pattern EMPLOYEES = Pattern.compile("/employees");
         private static final Pattern EMPLOYEE = Pattern.compile("/employees/(%s)".formatted(UUID.pattern()));
         private static final Pattern EMPLOYEE_PICTURE = Pattern.compile("/employees/(%s)/picture".formatted(UUID.pattern()));
@@ -58,12 +58,14 @@ public class ApiServlet extends HttpServlet {
 
         if (Paths.API.equals(servletPath)) {
             if (path.matches(Patterns.EMPLOYEES.pattern())) {
+                System.out.println("GET EMPLOYEES");
                 resp.setContentType("application/json");
                 resp.setStatus(HttpServletResponse.SC_OK);
                 resp.getWriter().write(jsonb.toJson(employeeController.getEmployees()));
                 return;
 
             } else if (path.matches(Patterns.EMPLOYEE.pattern())) {
+                System.out.println("GET EMPLOYEE");
                 resp.setContentType("application/json");
                 resp.setStatus(HttpServletResponse.SC_OK);
                 UUID uuid = extractUuid(Patterns.EMPLOYEE, path);

@@ -3,4 +3,9 @@ GET http://localhost:9080/HighTechComapny-1.0-SNAPSHOT/api/employees
 
 ###
 
-GET http://localhost:9080/HighTechComapny/
+GET http://localhost:9080/HighTechComapny-1.0-SNAPSHOT/api/employees/81e1c2a9-7f57-439b-b53d-6db88b07a333
+
+###
+
+GET http://localhost:9080/HighTechComapny-1.0-SNAPSHOT/api/employees/81e1c2a9-7f57-439b-b53d-6db88b07a333/picture
+
