@@ -24,6 +24,8 @@ public class EmployeeSimpleController implements EmployeeController {
 
     @Override
     public GetEmployeesResponse getEmployees() {
+        System.out.println(service);
+        System.out.println(service.findAll());
         return factory.employeesToResponse().apply(service.findAll());
     }
 
