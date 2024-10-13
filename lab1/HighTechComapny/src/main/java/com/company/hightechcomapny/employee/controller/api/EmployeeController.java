@@ -15,5 +15,10 @@ public interface EmployeeController {
     void patchEmployee(UUID id, PatchEmployeeRequest request);
     void deleteEmployee(UUID id);
     byte[] getEmployeePicture(UUID id);
-    void putEmployeePicture(UUID id, InputStream picture);
+
+    void putEmployeePicture(UUID id, InputStream picture, String filename);
+
+    void patchEmployeePicture(UUID uuid, InputStream picture, String filename);
+
+    void deleteEmployeePicture(UUID uuid);
 }

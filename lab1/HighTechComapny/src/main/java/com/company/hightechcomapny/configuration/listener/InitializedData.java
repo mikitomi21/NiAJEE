@@ -29,25 +29,25 @@ public class InitializedData implements ServletContextListener  {
                 .id(UUID.fromString("81e1c2a9-7f57-439b-b53d-6db88b07a000"))
                 .name("Jakub")
                 .salary(10000)
-                .picture(getResourceAsByteArray("/images/jakub.jpg"))
+                .picture("/images/jakub.jpg")
                 .build();
         Employee emp2 = Employee.builder()
                 .id(UUID.fromString("81e1c2a9-7f57-439b-b53d-6db88b07a111"))
                 .name("Michal")
                 .salary(35000)
-                .picture(getResourceAsByteArray("/images/michal.jpg"))
+                .picture("/images/michal.jpg")
                 .build();
         Employee emp3 = Employee.builder()
                 .id(UUID.fromString("81e1c2a9-7f57-439b-b53d-6db88b07a222"))
                 .name("Katarzyna")
                 .salary(200)
-                .picture(getResourceAsByteArray("/images/katarzyna.jpg"))
+                .picture("/images/katarzyna.jpg")
                 .build();
         Employee emp4 = Employee.builder()
                 .id(UUID.fromString("81e1c2a9-7f57-439b-b53d-6db88b07a333"))
                 .name("Basia")
                 .salary(6969)
-                .picture(getResourceAsByteArray("/images/basia.jpg"))
+                .picture("/images/basia.jpg")
                 .build();
 
         employeeService.create(emp1);

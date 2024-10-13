@@ -15,4 +15,5 @@ import java.util.UUID;
 public class PatchEmployeeRequest {
     private String name;
     private Integer salary;
+    private String picture;
 }

@@ -11,6 +11,7 @@ public class EmployeeToResponseFunction implements Function<Employee, GetEmploye
         return GetEmployeeResponse.builder()
                 .id(employee.getId())
                 .name(employee.getName())
+                .salary(employee.getSalary())
                 .build();
     }
 }

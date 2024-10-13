@@ -34,6 +34,6 @@ public class Employee {
 
     @ToString.Exclude
     @EqualsAndHashCode.Exclude
-    private byte[] picture;
+    private String picture;
 
 }

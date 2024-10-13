@@ -24,6 +24,7 @@ public class GetEmployeesResponse {
     public static class Employee {
         private UUID id;
         private String name;
+        private Integer salary;
     }
 
     @Singular

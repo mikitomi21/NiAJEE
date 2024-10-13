@@ -15,4 +15,14 @@
     <listener>
         <listener-class>com.company.hightechcomapny.configuration.listener.InitializedData</listener-class>
     </listener>
+
+    <servlet>
+        <servlet-name>imageServlet</servlet-name>
+        <servlet-class>com.company.hightechcomapny.controller.servlet.ApiServlet</servlet-class>
+    </servlet>
+
+    <servlet-mapping>
+        <servlet-name>imageServlet</servlet-name>
+        <url-pattern>/images/*</url-pattern>
+    </servlet-mapping>
 </web-app>

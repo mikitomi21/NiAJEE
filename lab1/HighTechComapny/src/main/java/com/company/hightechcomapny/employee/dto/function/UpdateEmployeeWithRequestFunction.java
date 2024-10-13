@@ -8,6 +8,10 @@ import java.util.function.BiFunction;
 public class UpdateEmployeeWithRequestFunction implements BiFunction<Employee, PatchEmployeeRequest, Employee> {
     @Override
     public Employee apply(Employee employee, PatchEmployeeRequest patchEmployeeRequest) {
-        return null;
+        return Employee.builder()
+                .id(employee.getId())
+                .name(patchEmployeeRequest.getName())
+                .salary(patchEmployeeRequest.getSalary())
+                .build();
     }
 }

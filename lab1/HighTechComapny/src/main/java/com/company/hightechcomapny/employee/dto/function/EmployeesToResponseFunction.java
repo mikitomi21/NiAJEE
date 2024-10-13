@@ -14,6 +14,7 @@ public class EmployeesToResponseFunction implements Function<List<Employee>, Get
                         .map(employee -> GetEmployeesResponse.Employee.builder()
                                 .id(employee.getId())
                                 .name(employee.getName())
+                                .salary(employee.getSalary())
                                 .build())
                         .toList())
                 .build();
