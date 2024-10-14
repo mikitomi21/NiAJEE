@@ -1,16 +1,16 @@
-GET http://localhost:9080/HighTechComapny-1.0-SNAPSHOT/api/employees
+GET http://localhost:9080/hightechcomapny/api/employees
 
 ###
 
-GET http://localhost:9080/HighTechComapny-1.0-SNAPSHOT/api/employees/81e1c2a9-7f57-439b-b53d-6db88b07a000
+GET http://localhost:9080/hightechcomapny/api/employees/81e1c2a9-7f57-439b-b53d-6db88b07a000
 
 ###
 
-GET http://localhost:9080/HighTechComapny-1.0-SNAPSHOT/api/employees/81e1c2a9-7f57-439b-b53d-6db88b07a000/picture
+GET http://localhost:9080/hightechcomapny/api/employees/81e1c2a9-7f57-439b-b53d-6db88b07a000/picture
 
 ###
 
-PUT http://localhost:9080/HighTechComapny-1.0-SNAPSHOT/api/employees/81e1c2a9-7f57-439b-b53d-6db88b07a000/picture
+PUT http://localhost:9080/hightechcomapny/api/employees/81e1c2a9-7f57-439b-b53d-6db88b07a000/picture
 Content-Type: multipart/form-data; boundary=----WebKitFormBoundary7MA4YWxkTrZu0gW
 
 ------WebKitFormBoundary7MA4YWxkTrZu0gW
@@ -23,7 +23,7 @@ Content-Type: image/jpeg
 ###
 
 
-PATCH http://localhost:9080/HighTechComapny-1.0-SNAPSHOT/api/employees/81e1c2a9-7f57-439b-b53d-6db88b07a000/picture
+PATCH http://localhost:9080/hightechcomapny/api/employees/81e1c2a9-7f57-439b-b53d-6db88b07a000/picture
 Content-Type: multipart/form-data; boundary=----WebKitFormBoundary7MA4YWxkTrZu0gW
 
 ------WebKitFormBoundary7MA4YWxkTrZu0gW
@@ -35,15 +35,15 @@ Content-Type: image/jpeg
 
 ###
 
-DELETE http://localhost:9080/HighTechComapny-1.0-SNAPSHOT/api/employees/81e1c2a9-7f57-439b-b53d-6db88b07a000/picture
+DELETE http://localhost:9080/hightechcomapny/api/employees/81e1c2a9-7f57-439b-b53d-6db88b07a000/picture
 
 ###
 
-DELETE http://localhost:9080/HighTechComapny-1.0-SNAPSHOT/api/employees/81e1c2a9-7f57-439b-b53d-6db88b07a000
+DELETE http://localhost:9080/hightechcomapny/api/employees/81e1c2a9-7f57-439b-b53d-6db88b07a000
 
 ###
 
-PUT http://localhost:9080/HighTechComapny-1.0-SNAPSHOT/api/employees/81e1c2a9-7f57-439b-b53d-6db88b07a555
+PUT http://localhost:9080/hightechcomapny/api/employees/81e1c2a9-7f57-439b-b53d-6db88b07a555
 Content-Type: application/json
 
 {
@@ -53,7 +53,7 @@ Content-Type: application/json
 
 ###
 
-PUT http://localhost:9080/HighTechComapny-1.0-SNAPSHOT/api/employees/81e1c2a9-7f57-439b-b53d-6db88b07a000
+PUT http://localhost:9080/hightechcomapny/api/employees/81e1c2a9-7f57-439b-b53d-6db88b07a000
 Content-Type: application/json
 
 {

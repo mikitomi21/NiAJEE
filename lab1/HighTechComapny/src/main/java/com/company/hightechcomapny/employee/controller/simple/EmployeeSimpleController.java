@@ -8,15 +8,9 @@ import com.company.hightechcomapny.employee.dto.PatchEmployeeRequest;
 import com.company.hightechcomapny.employee.dto.PutEmployeeRequest;
 import com.company.hightechcomapny.employee.entity.Employee;
 import com.company.hightechcomapny.employee.service.EmployeeService;
-import com.company.hightechcomapny.exception.EmployeeAlreadyExistsException;
-import com.company.hightechcomapny.exception.EmployeeNotFoundException;
-import jakarta.ws.rs.BadRequestException;
 
 import java.io.IOException;
 import java.io.InputStream;
-import java.nio.file.Files;
-import java.nio.file.Path;
-import java.nio.file.Paths;
 import java.util.List;
 import java.util.UUID;
 
@@ -32,7 +26,7 @@ public class EmployeeSimpleController implements EmployeeController {
     public GetEmployeesResponse getEmployees() {
         List<Employee> employees = service.findAll();
         if (employees.isEmpty()) {
-            throw new EmployeeNotFoundException();
+            throw new RuntimeException();
         }
         return factory.employeesToResponse().apply(employees);
     }
@@ -41,20 +35,20 @@ public class EmployeeSimpleController implements EmployeeController {
     public GetEmployeeResponse getEmployee(UUID id) {
         return service.find(id)
                 .map(factory.employeeToResponse())
-                .orElseThrow(EmployeeNotFoundException::new);
+                .orElseThrow(RuntimeException::new);
     }
 
     @Override
     public void putEmployee(UUID id, PutEmployeeRequest request) {
         if (service.find(id).isPresent()) {
             System.out.println("Employee with ID: " + id + " already exists.");
-            throw new EmployeeAlreadyExistsException("Employee with ID: " + id + " already exists.");
+            throw new RuntimeException("Employee with ID: " + id + " already exists.");
         }
 
         try {
             service.create(factory.requestToEmployee().apply(id, request));
         } catch (IllegalArgumentException ex) {
-            throw new BadRequestException(ex);
+            throw new RuntimeException(ex);
         }
     }
 
@@ -63,7 +57,7 @@ public class EmployeeSimpleController implements EmployeeController {
         service.find(id).ifPresentOrElse(
                 entity -> service.update(factory.updateEmployee().apply(entity, request)),
                 () -> {
-                    throw new EmployeeNotFoundException();
+                    throw new RuntimeException();
                 }
         );
 
@@ -74,7 +68,7 @@ public class EmployeeSimpleController implements EmployeeController {
         service.find(id).ifPresentOrElse(
                 entity -> service.delete(id),
                 () -> {
-                    throw new EmployeeNotFoundException();
+                    throw new RuntimeException();
                 }
         );
 
@@ -86,7 +80,7 @@ public class EmployeeSimpleController implements EmployeeController {
                 .map(employee -> {
                     String picturePathStr = employee.getPicture();
                     if (picturePathStr == null || picturePathStr.isEmpty()) {
-                        throw new EmployeeNotFoundException();
+                        throw new RuntimeException();
                     }
 
                     try (InputStream inputStream = getClass().getResourceAsStream(picturePathStr)) {
@@ -98,7 +92,7 @@ public class EmployeeSimpleController implements EmployeeController {
                         throw new RuntimeException("Błąd podczas odczytu pliku: " + picturePathStr, e);
                     }
                 })
-                .orElseThrow(EmployeeNotFoundException::new);
+                .orElseThrow(RuntimeException::new);
     }
 
     @Override
@@ -111,7 +105,7 @@ public class EmployeeSimpleController implements EmployeeController {
                     service.updatePicture(id, picture, filename);
                 },
                 () -> {
-                    throw new EmployeeNotFoundException();
+                    throw new RuntimeException();
                 }
         );
     }
@@ -121,7 +115,7 @@ public class EmployeeSimpleController implements EmployeeController {
         service.find(uuid).ifPresentOrElse(
                 entity -> service.updatePicture(uuid, picture, filename),
                 () -> {
-                    throw new EmployeeNotFoundException();
+                    throw new RuntimeException();
                 }
         );
     }
@@ -132,12 +126,12 @@ public class EmployeeSimpleController implements EmployeeController {
         service.find(uuid).ifPresentOrElse(
                 entity -> {
                     if (entity.getPicture() == null || entity.getPicture().isEmpty()) {
-                        throw new EmployeeNotFoundException();
+                        throw new RuntimeException();
                     }
                     service.updatePicture(uuid, null, null);
                 },
                 () -> {
-                    throw new EmployeeNotFoundException();
+                    throw new RuntimeException();
                 }
         );
     }

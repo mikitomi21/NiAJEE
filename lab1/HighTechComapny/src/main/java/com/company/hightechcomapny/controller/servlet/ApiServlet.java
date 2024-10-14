@@ -4,8 +4,6 @@ import com.company.hightechcomapny.employee.controller.api.EmployeeController;
 import com.company.hightechcomapny.employee.controller.simple.EmployeeSimpleController;
 import com.company.hightechcomapny.employee.dto.PatchEmployeeRequest;
 import com.company.hightechcomapny.employee.dto.PutEmployeeRequest;
-import com.company.hightechcomapny.exception.EmployeeAlreadyExistsException;
-import com.company.hightechcomapny.exception.EmployeeNotFoundException;
 import jakarta.json.bind.Jsonb;
 import jakarta.json.bind.JsonbBuilder;
 import jakarta.servlet.ServletException;
@@ -14,8 +12,6 @@ import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
-import jakarta.servlet.http.Part;
-import jdk.javadoc.doclet.DocletEnvironment;
 
 import java.io.IOException;
 import java.util.UUID;
@@ -73,7 +69,7 @@ public class ApiServlet extends HttpServlet {
                     resp.getWriter().write(jsonb.toJson(employeeController.getEmployees()));
                     resp.setStatus(HttpServletResponse.SC_OK);
                     resp.setContentType("application/json");
-                } catch (EmployeeNotFoundException e) {
+                } catch (RuntimeException e) {
                     resp.setStatus(HttpServletResponse.SC_NOT_FOUND);
                 }
                 return;
@@ -84,7 +80,7 @@ public class ApiServlet extends HttpServlet {
                     resp.getWriter().write(jsonb.toJson(employeeController.getEmployee(uuid)));
                     resp.setContentType("application/json");
                     resp.setStatus(HttpServletResponse.SC_OK);
-                } catch (EmployeeNotFoundException e) {
+                } catch (RuntimeException e) {
                     resp.setStatus(HttpServletResponse.SC_NOT_FOUND);
                 }
                 return;
@@ -96,7 +92,7 @@ public class ApiServlet extends HttpServlet {
                     byte[] portrait = employeeController.getEmployeePicture(uuid);
                     resp.setContentLength(portrait.length);
                     resp.getOutputStream().write(portrait);
-                } catch (EmployeeNotFoundException e) {
+                } catch (RuntimeException e) {
                     resp.setStatus(HttpServletResponse.SC_NOT_FOUND);
                 }
                 return;
@@ -121,7 +117,7 @@ public class ApiServlet extends HttpServlet {
                     employeeController.putEmployee(uuid, jsonb.fromJson(req.getReader(), PutEmployeeRequest.class));
                     resp.addHeader("Location", createUrl(req, Paths.API, "employees", uuid.toString()));
                     resp.setStatus(HttpServletResponse.SC_NO_CONTENT);
-                } catch(EmployeeAlreadyExistsException e) {
+                } catch(Exception e) {
                     resp.setStatus(HttpServletResponse.SC_CONFLICT);
                 }
                 return;
@@ -132,7 +128,7 @@ public class ApiServlet extends HttpServlet {
                     String fileName = req.getPart("picture").getSubmittedFileName();
                     employeeController.putEmployeePicture(uuid, req.getPart("picture").getInputStream(), fileName);
                     resp.setStatus(HttpServletResponse.SC_NO_CONTENT);
-                } catch (EmployeeAlreadyExistsException e) {
+                } catch (RuntimeException e) {
                     resp.setStatus(HttpServletResponse.SC_CONFLICT);
                 }
                 return;
@@ -156,7 +152,7 @@ public class ApiServlet extends HttpServlet {
                 try {
                     employeeController.deleteEmployee(uuid);
                     resp.setStatus(HttpServletResponse.SC_NO_CONTENT);
-                } catch (EmployeeNotFoundException e) {
+                } catch (RuntimeException e) {
                     System.out.println("Employee not found");
                     resp.setStatus(HttpServletResponse.SC_NOT_FOUND);
                 }
@@ -167,7 +163,7 @@ public class ApiServlet extends HttpServlet {
                 try {
                     employeeController.deleteEmployeePicture(uuid);
                     resp.setStatus(HttpServletResponse.SC_NO_CONTENT);
-                } catch (EmployeeNotFoundException e) {
+                } catch (RuntimeException e) {
                     System.out.println("Employee picture not found");
                     resp.setStatus(HttpServletResponse.SC_NOT_FOUND);
                 }
