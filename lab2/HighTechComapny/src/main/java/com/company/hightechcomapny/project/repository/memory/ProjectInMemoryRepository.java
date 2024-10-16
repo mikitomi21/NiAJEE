@@ -4,14 +4,18 @@ import com.company.hightechcomapny.datastore.DataStore;
 import com.company.hightechcomapny.employee.entity.Employee;
 import com.company.hightechcomapny.project.entity.Project;
 import com.company.hightechcomapny.project.repository.api.ProjectRepository;
+import jakarta.enterprise.context.RequestScoped;
+import jakarta.inject.Inject;
 
 import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
 
+@RequestScoped
 public class ProjectInMemoryRepository implements ProjectRepository {
     private final DataStore store;
 
+    @Inject
     public ProjectInMemoryRepository(DataStore store) {
         this.store = store;
     }

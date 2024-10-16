@@ -71,3 +71,13 @@ GET http://localhost:9080/hightechcomapny/api/tasks
 ###
 
 GET http://localhost:9080/hightechcomapny/api/tasks/0001c2a9-7f57-439b-b53d-6db88b07a000
+
+###
+------------------------------------------------------------------------------------------------------------
+###
+
+GET http://localhost:9080/hightechcomapny/api/projects
+
+###
+
+GET http://localhost:9080/hightechcomapny/api/projects/5551c2a9-7f57-439b-b53d-6db88b07a000

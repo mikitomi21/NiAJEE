@@ -15,12 +15,10 @@ import java.util.UUID;
 @NoArgsConstructor(force = true)
 public class TaskService {
     private final TaskRepository taskRepository;
-//    private final EmployeeRepository employeeRepository;
 
     @Inject
-    public TaskService(TaskRepository taskRepository, EmployeeRepository employeeRepository) {
+    public TaskService(TaskRepository taskRepository) {
         this.taskRepository = taskRepository;
-//        this.employeeRepository = employeeRepository;
     }
 
     public Optional<Task> find(UUID id) {
