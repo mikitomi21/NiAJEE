@@ -5,6 +5,7 @@ import com.company.hightechcomapny.project.entity.Project;
 import com.company.hightechcomapny.task.entity.Priority;
 import lombok.*;
 
+import java.time.LocalDate;
 import java.util.Date;
 import java.util.UUID;
 
@@ -18,7 +19,7 @@ import java.util.UUID;
 public class GetTaskResponse {
     private UUID id;
     private String description;
-    private Date deadline;
+    private LocalDate deadline;
     private Priority priority;
 
     @Getter

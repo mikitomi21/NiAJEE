@@ -27,8 +27,6 @@ public class Employee {
     private String name;
     private Integer salary;
 
-    private List<Task> tasks;
-
 //    @ToString.Exclude
 //    private String password;
 

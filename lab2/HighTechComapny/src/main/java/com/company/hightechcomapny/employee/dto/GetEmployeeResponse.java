@@ -12,7 +12,6 @@ import java.util.UUID;
 @AllArgsConstructor(access = AccessLevel.PRIVATE)
 @ToString
 @EqualsAndHashCode
-
 public class GetEmployeeResponse {
 //    @Getter
 //    @Setter

@@ -12,6 +12,7 @@ import lombok.ToString;
 import lombok.experimental.SuperBuilder;
 
 import java.io.Serializable;
+import java.time.LocalDate;
 import java.util.Date;
 import java.util.UUID;
 
@@ -26,7 +27,7 @@ import java.util.UUID;
 public class Task {
     private UUID id;
     private String description;
-    private Date deadline;
+    private LocalDate deadline;
     private Priority priority;
 
     private Employee employee;

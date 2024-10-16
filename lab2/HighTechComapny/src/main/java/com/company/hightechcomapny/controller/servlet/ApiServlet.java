@@ -3,9 +3,8 @@ package com.company.hightechcomapny.controller.servlet;
 import com.company.hightechcomapny.employee.controller.api.EmployeeController;
 import com.company.hightechcomapny.employee.dto.PatchEmployeeRequest;
 import com.company.hightechcomapny.employee.dto.PutEmployeeRequest;
+import com.company.hightechcomapny.project.controller.api.ProjectController;
 import com.company.hightechcomapny.task.controller.api.TaskController;
-import com.company.hightechcomapny.task.controller.simple.TaskSimpleController;
-import jakarta.enterprise.inject.Default;
 import jakarta.inject.Inject;
 import jakarta.json.bind.Jsonb;
 import jakarta.json.bind.JsonbBuilder;
@@ -30,6 +29,7 @@ public class ApiServlet extends HttpServlet {
 
     private final EmployeeController employeeController;
     private final TaskController taskController;
+    private final ProjectController projectController;
 
     public static final class Paths {
         public static final String API = "/api";
@@ -42,14 +42,17 @@ public class ApiServlet extends HttpServlet {
         private static final Pattern EMPLOYEE_PICTURE = Pattern.compile("/employees/(%s)/picture".formatted(UUID.pattern()));
         private static final Pattern TASK = Pattern.compile("/tasks/(%s)".formatted(UUID.pattern()));
         private static final Pattern TASKS = Pattern.compile("/tasks");
+        private static final Pattern PROJECT = Pattern.compile("/projects/(%s)".formatted(UUID.pattern()));
+        private static final Pattern PROJECTS = Pattern.compile("/projects");
     }
 
     private final Jsonb jsonb = JsonbBuilder.create();
 
     @Inject
-    public ApiServlet(EmployeeController employeeController, TaskController taskController) {
+    public ApiServlet(EmployeeController employeeController, TaskController taskController, ProjectController projectController) {
         this.employeeController = employeeController;
         this.taskController = taskController;
+        this.projectController = projectController;
     }
 
     @Override
@@ -119,6 +122,23 @@ public class ApiServlet extends HttpServlet {
                     resp.setStatus(HttpServletResponse.SC_NOT_FOUND);
                 }
 
+            } else if (path.matches(Patterns.PROJECT.pattern())) {
+                UUID uuid = extractUuid(Patterns.PROJECT, path);
+                try {
+                    resp.getWriter().write(jsonb.toJson(projectController.getProject(uuid)));
+                    resp.setContentType("application/json");
+                    resp.setStatus(HttpServletResponse.SC_OK);
+                } catch (RuntimeException e) {
+                    resp.setStatus(HttpServletResponse.SC_NOT_FOUND);
+                }
+            } else if (path.matches(Patterns.PROJECTS.pattern())) {
+                try {
+                    resp.getWriter().write(jsonb.toJson(projectController.getProjects()));
+                    resp.setContentType("application/json");
+                    resp.setStatus(HttpServletResponse.SC_OK);
+                } catch (RuntimeException e) {
+                    resp.setStatus(HttpServletResponse.SC_NOT_FOUND);
+                }
             } else {
                 resp.setStatus(HttpServletResponse.SC_BAD_REQUEST);
             }

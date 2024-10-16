@@ -1,10 +1,8 @@
-package com.company.hightechcomapny.task.dto;
+package com.company.hightechcomapny.project.dto;
 
-import com.company.hightechcomapny.task.entity.Priority;
+import com.company.hightechcomapny.employee.dto.GetEmployeesResponse;
 import lombok.*;
 
-import java.time.LocalDate;
-import java.util.Date;
 import java.util.List;
 import java.util.UUID;
 
@@ -15,7 +13,7 @@ import java.util.UUID;
 @AllArgsConstructor(access = AccessLevel.PRIVATE)
 @ToString
 @EqualsAndHashCode
-public class GetTasksResponse {
+public class GetProjectsResponse {
 
     @Getter
     @Setter
@@ -24,13 +22,12 @@ public class GetTasksResponse {
     @AllArgsConstructor(access = AccessLevel.PRIVATE)
     @ToString
     @EqualsAndHashCode
-    public static class Task {
+    public static class Project {
         private UUID id;
-        private String description;
-        private LocalDate deadline;
-        private Priority priority;
+        private String name;
+        private Integer budget;
     }
 
     @Singular
-    private List<Task> tasks;
+    private List<Project> projects;
 }

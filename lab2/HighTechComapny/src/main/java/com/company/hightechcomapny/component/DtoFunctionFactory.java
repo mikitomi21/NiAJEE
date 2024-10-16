@@ -4,11 +4,14 @@ import com.company.hightechcomapny.employee.dto.function.EmployeeToResponseFunct
 import com.company.hightechcomapny.employee.dto.function.EmployeesToResponseFunction;
 import com.company.hightechcomapny.employee.dto.function.RequestToEmployeeFunction;
 import com.company.hightechcomapny.employee.dto.function.UpdateEmployeeWithRequestFunction;
+import com.company.hightechcomapny.project.dto.function.ProjectToResponseFunction;
+import com.company.hightechcomapny.project.dto.function.ProjectsToResponseFunction;
+import com.company.hightechcomapny.project.dto.function.RequestToProjectFunction;
+import com.company.hightechcomapny.project.dto.function.UpdateProjectWithRequestFunction;
 import com.company.hightechcomapny.task.dto.function.RequestToTaskFunction;
 import com.company.hightechcomapny.task.dto.function.TaskToResponseFunction;
 import com.company.hightechcomapny.task.dto.function.TasksToResponseFunction;
 import com.company.hightechcomapny.task.dto.function.UpdateTaskWithRequestFunction;
-import org.hibernate.sql.Update;
 import jakarta.enterprise.context.ApplicationScoped;
 
 @ApplicationScoped
@@ -40,6 +43,19 @@ public class DtoFunctionFactory {
     }
     public UpdateTaskWithRequestFunction updateTask() {
         return new UpdateTaskWithRequestFunction();
+    }
+
+    public ProjectToResponseFunction projectToResponse() {
+        return new ProjectToResponseFunction();
+    }
+    public ProjectsToResponseFunction projectsToResponse() {
+        return new ProjectsToResponseFunction();
+    }
+    public RequestToProjectFunction requestToProject() {
+        return new RequestToProjectFunction();
+    }
+    public UpdateProjectWithRequestFunction updateProject() {
+        return new UpdateProjectWithRequestFunction();
     }
 
 }
