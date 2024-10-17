@@ -62,6 +62,7 @@ public class InitializedData implements ServletContextListener  {
                 .build();
         taskService.create(tsk1);
         taskService.create(tsk2);
+        System.out.println(tsk1);
 
         Employee emp1 = Employee.builder()
                 .id(UUID.fromString("81e1c2a9-7f57-439b-b53d-6db88b07a000"))

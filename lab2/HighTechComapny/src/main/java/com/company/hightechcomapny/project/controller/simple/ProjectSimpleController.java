@@ -4,6 +4,7 @@ import com.company.hightechcomapny.component.DtoFunctionFactory;
 import com.company.hightechcomapny.project.controller.api.ProjectController;
 import com.company.hightechcomapny.project.dto.GetProjectResponse;
 import com.company.hightechcomapny.project.dto.GetProjectsResponse;
+import com.company.hightechcomapny.project.dto.PatchProjectRequest;
 import com.company.hightechcomapny.project.dto.PutProjectRequest;
 import com.company.hightechcomapny.project.entity.Project;
 import com.company.hightechcomapny.project.service.ProjectService;
@@ -54,13 +55,13 @@ public class ProjectSimpleController implements ProjectController {
     }
 
     @Override
-    public void patchProject(UUID id, PutProjectRequest request) {
+    public void patchProject(UUID id, PatchProjectRequest request) {
         if (service.find(id).isEmpty()) {
             System.out.println("Project with ID: " + id + " does not exist.");
             throw new RuntimeException("Project with ID: " + id + " does not exist.");
         }
         try {
-            service.update(factory.requestToProject().apply(id, request));
+            service.find(id).ifPresent(project -> service.update(factory.updateProject().apply(project, request)));
         } catch (IllegalArgumentException ex) {
             throw new RuntimeException(ex);
         }

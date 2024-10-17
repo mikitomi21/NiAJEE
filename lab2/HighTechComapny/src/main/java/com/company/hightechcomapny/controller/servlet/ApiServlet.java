@@ -4,7 +4,11 @@ import com.company.hightechcomapny.employee.controller.api.EmployeeController;
 import com.company.hightechcomapny.employee.dto.PatchEmployeeRequest;
 import com.company.hightechcomapny.employee.dto.PutEmployeeRequest;
 import com.company.hightechcomapny.project.controller.api.ProjectController;
+import com.company.hightechcomapny.project.dto.PatchProjectRequest;
+import com.company.hightechcomapny.project.dto.PutProjectRequest;
 import com.company.hightechcomapny.task.controller.api.TaskController;
+import com.company.hightechcomapny.task.dto.PatchTaskRequest;
+import com.company.hightechcomapny.task.dto.PutTaskRequest;
 import jakarta.inject.Inject;
 import jakarta.json.bind.Jsonb;
 import jakarta.json.bind.JsonbBuilder;
@@ -163,7 +167,6 @@ public class ApiServlet extends HttpServlet {
                 } catch(Exception e) {
                     resp.setStatus(HttpServletResponse.SC_CONFLICT);
                 }
-                return;
             } else if (path.matches(Patterns.EMPLOYEE_PICTURE.pattern())) {
                 UUID uuid = extractUuid(Patterns.EMPLOYEE_PICTURE, path);
                 System.out.println("PUT EMPLOYEE PICTURE");
@@ -174,10 +177,30 @@ public class ApiServlet extends HttpServlet {
                 } catch (RuntimeException e) {
                     resp.setStatus(HttpServletResponse.SC_CONFLICT);
                 }
-                return;
+
+            } else if (path.matches(Patterns.TASK.pattern())) {
+                UUID uuid = extractUuid(Patterns.TASK, path);
+                try {
+                    taskController.putTask(uuid, jsonb.fromJson(req.getReader(), PutTaskRequest.class));
+                    resp.addHeader("Location", createUrl(req, Paths.API, "tasks", uuid.toString()));
+                    resp.setStatus(HttpServletResponse.SC_NO_CONTENT);
+                } catch (RuntimeException e) {
+                    resp.setStatus(HttpServletResponse.SC_CONFLICT);
+                }
+
+            } else if (path.matches(Patterns.PROJECT.pattern())) {
+                UUID uuid = extractUuid(Patterns.PROJECT, path);
+                try {
+                    projectController.putProject(uuid, jsonb.fromJson(req.getReader(), PutProjectRequest.class));
+                    resp.addHeader("Location", createUrl(req, Paths.API, "projects", uuid.toString()));
+                    resp.setStatus(HttpServletResponse.SC_NO_CONTENT);
+                } catch (RuntimeException e) {
+                    resp.setStatus(HttpServletResponse.SC_CONFLICT);
+                }
 
             } else {
                 resp.setStatus(HttpServletResponse.SC_BAD_REQUEST);
+
             }
         }
     }
@@ -189,6 +212,9 @@ public class ApiServlet extends HttpServlet {
         String servletPath = req.getServletPath();
 
         System.out.println("DELETE");
+        System.out.println(path);
+        System.out.println(req);
+        System.out.println(resp);
 
         if (Paths.API.equals(servletPath)) {
             if (path.matches(Patterns.EMPLOYEE.pattern())) {
@@ -200,9 +226,8 @@ public class ApiServlet extends HttpServlet {
                     System.out.println("Employee not found");
                     resp.setStatus(HttpServletResponse.SC_NOT_FOUND);
                 }
-                return;
             }
-            if (path.matches(Patterns.EMPLOYEE_PICTURE.pattern())) {
+            else if (path.matches(Patterns.EMPLOYEE_PICTURE.pattern())) {
                 UUID uuid = extractUuid(Patterns.EMPLOYEE_PICTURE, path);
                 try {
                     employeeController.deleteEmployeePicture(uuid);
@@ -211,10 +236,30 @@ public class ApiServlet extends HttpServlet {
                     System.out.println("Employee picture not found");
                     resp.setStatus(HttpServletResponse.SC_NOT_FOUND);
                 }
-                return;
 
-            }else {
+            } else if (path.matches(Patterns.TASK.pattern())) {
+                UUID uuid = extractUuid(Patterns.TASK, path);
+                try {
+                    taskController.deleteTask(uuid);
+                    resp.setStatus(HttpServletResponse.SC_NO_CONTENT);
+                } catch (RuntimeException e) {
+                    System.out.println("Task not found");
+                    resp.setStatus(HttpServletResponse.SC_NOT_FOUND);
+                }
+
+            } else if (path.matches(Patterns.PROJECT.pattern())) {
+                UUID uuid = extractUuid(Patterns.PROJECT, path);
+                try {
+                    projectController.deleteProject(uuid);
+                    resp.setStatus(HttpServletResponse.SC_NO_CONTENT);
+                } catch (RuntimeException e) {
+                    System.out.println("Project not found");
+                    resp.setStatus(HttpServletResponse.SC_NOT_FOUND);
+                }
+
+            } else {
                 resp.setStatus(HttpServletResponse.SC_BAD_REQUEST);
+
             }
         }
     }
@@ -230,20 +275,47 @@ public class ApiServlet extends HttpServlet {
             if (path.matches(Patterns.EMPLOYEE.pattern())) {
                 System.out.println("PATCH EMPLOYEE");
                 UUID uuid = extractUuid(Patterns.EMPLOYEE, path);
-                employeeController.patchEmployee(uuid, jsonb.fromJson(req.getReader(), PatchEmployeeRequest.class));
-                resp.addHeader("Location", createUrl(req, Paths.API, "employees", uuid.toString()));
-                resp.setStatus(HttpServletResponse.SC_NO_CONTENT);
-                return;
-            }
-            if (path.matches(Patterns.EMPLOYEE_PICTURE.pattern())){
-                UUID uuid = extractUuid(Patterns.EMPLOYEE_PICTURE, path);
-                String fileName = req.getPart("picture").getSubmittedFileName();
-                employeeController.patchEmployeePicture(uuid, req.getPart("picture").getInputStream(), fileName);
-                resp.setStatus(HttpServletResponse.SC_NO_CONTENT);
-                return;
+                try {
+                    employeeController.patchEmployee(uuid, jsonb.fromJson(req.getReader(), PatchEmployeeRequest.class));
+                    resp.addHeader("Location", createUrl(req, Paths.API, "employees", uuid.toString()));
+                    resp.setStatus(HttpServletResponse.SC_NO_CONTENT);
+                } catch (RuntimeException e) {
+                    resp.setStatus(HttpServletResponse.SC_CONFLICT);
+                }
 
-            }else {
+            } else if (path.matches(Patterns.EMPLOYEE_PICTURE.pattern())){
+                UUID uuid = extractUuid(Patterns.EMPLOYEE_PICTURE, path);
+                try {
+                    String fileName = req.getPart("picture").getSubmittedFileName();
+                    employeeController.patchEmployeePicture(uuid, req.getPart("picture").getInputStream(), fileName);
+                    resp.setStatus(HttpServletResponse.SC_NO_CONTENT);
+                } catch (RuntimeException e) {
+                    resp.setStatus(HttpServletResponse.SC_CONFLICT);
+                }
+
+            } else if (path.matches(Patterns.TASK.pattern())) {
+                UUID uuid = extractUuid(Patterns.TASK, path);
+                try {
+                    taskController.patchTask(uuid, jsonb.fromJson(req.getReader(), PatchTaskRequest.class));
+                    resp.addHeader("Location", createUrl(req, Paths.API, "tasks", uuid.toString()));
+                    resp.setStatus(HttpServletResponse.SC_NO_CONTENT);
+                } catch (RuntimeException e) {
+                    resp.setStatus(HttpServletResponse.SC_CONFLICT);
+                }
+
+            } else if (path.matches(Patterns.PROJECT.pattern())) {
+                UUID uuid = extractUuid(Patterns.PROJECT, path);
+                try {
+                    projectController.patchProject(uuid, jsonb.fromJson(req.getReader(), PatchProjectRequest.class));
+                    resp.addHeader("Location", createUrl(req, Paths.API, "projects", uuid.toString()));
+                    resp.setStatus(HttpServletResponse.SC_NO_CONTENT);
+                } catch (RuntimeException e) {
+                    resp.setStatus(HttpServletResponse.SC_CONFLICT);
+                }
+
+            } else {
                 resp.setStatus(HttpServletResponse.SC_BAD_REQUEST);
+
             }
         }
     }
