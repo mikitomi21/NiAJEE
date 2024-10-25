@@ -1,0 +1,148 @@
+GET http://localhost:9080/hightechcomapny/api/employees
+
+###
+
+GET http://localhost:9080/hightechcomapny/api/employees/81e1c2a9-7f57-439b-b53d-6db88b07a000
+
+
+###
+
+GET http://localhost:9080/hightechcomapny/api/employees/81e1c2a9-7f57-439b-b53d-6db88b07a000/picture
+
+###
+
+PUT http://localhost:9080/hightechcomapny/api/employees/81e1c2a9-7f57-439b-b53d-6db88b07a000/picture
+Content-Type: multipart/form-data; boundary=----WebKitFormBoundary7MA4YWxkTrZu0gW
+
+------WebKitFormBoundary7MA4YWxkTrZu0gW
+Content-Disposition: form-data; name="picture"; filename="basia.jpg"
+Content-Type: image/jpeg
+
+<zawartość pliku obrazu>
+------WebKitFormBoundary7MA4YWxkTrZu0gW--
+
+###
+
+
+PATCH http://localhost:9080/hightechcomapny/api/employees/81e1c2a9-7f57-439b-b53d-6db88b07a000/picture
+Content-Type: multipart/form-data; boundary=----WebKitFormBoundary7MA4YWxkTrZu0gW
+
+------WebKitFormBoundary7MA4YWxkTrZu0gW
+Content-Disposition: form-data; name="picture"; filename="basia.jpg"
+Content-Type: image/jpeg
+
+<zawartość pliku obrazu>
+------WebKitFormBoundary7MA4YWxkTrZu0gW--
+
+###
+
+DELETE http://localhost:9080/hightechcomapny/api/employees/81e1c2a9-7f57-439b-b53d-6db88b07a000/picture
+
+###
+
+DELETE http://localhost:9080/hightechcomapny/api/employees/81e1c2a9-7f57-439b-b53d-6db88b07a000
+
+###
+
+PUT http://localhost:9080/hightechcomapny/api/employees/81e1c2a9-7f57-439b-b53d-6db88b07a555
+Content-Type: application/json
+
+{
+  "name": "Elad",
+  "salary": 10000
+}
+
+###
+
+PUT http://localhost:9080/hightechcomapny/api/employees/81e1c2a9-7f57-439b-b53d-6db88b07a000
+Content-Type: application/json
+
+{
+"name": "Jakub",
+"salary": 10009
+}
+
+
+
+
+
+###
+------------------------------------------------------------------------------------------------------------
+###
+
+
+
+
+
+GET http://localhost:9080/hightechcomapny/api/tasks
+
+###
+
+GET http://localhost:9080/hightechcomapny/api/tasks/0001c2a9-7f57-439b-b53d-6db88b07a999
+
+###
+
+PUT http://localhost:9080/hightechcomapny/api/tasks/0001c2a9-7f57-439b-b53d-6db88b07a999
+Content-Type: application/json
+
+{
+  "deadline": "2024-12-12",
+  "description": "siema",
+  "priority": "LOW"
+}
+
+###
+
+PATCH http://localhost:9080/hightechcomapny/api/tasks/0001c2a9-7f57-439b-b53d-6db88b07a999
+Content-Type: application/json
+
+{
+  "deadline": "2024-10-12",
+  "description": "siema2",
+  "priority": "MEDIUM"
+}
+
+###
+
+DELETE http://localhost:9080/hightechcomapny/api/tasks/0001c2a9-7f57-439b-b53d-6db88b07a999
+
+
+
+###
+------------------------------------------------------------------------------------------------------------
+###
+
+
+
+
+
+GET http://localhost:9080/hightechcomapny/api/projects
+
+###
+
+GET http://localhost:9080/hightechcomapny/api/projects/5551c2a9-7f57-439b-b53d-6db88b07a000
+
+###
+
+
+PUT http://localhost:9080/hightechcomapny/api/projects/5551c2a9-7f57-439b-b53d-6db88b07a999
+Content-Type: application/json
+
+{
+  "budget": "6969",
+  "name": "Nazwa"
+}
+
+###
+
+PATCH http://localhost:9080/hightechcomapny/api/projects/5551c2a9-7f57-439b-b53d-6db88b07a999
+Content-Type: application/json
+
+{
+  "budget": "1111",
+  "name": "Nazwa2"
+}
+
+###
+
+DELETE http://localhost:9080/hightechcomapny/api/projects/5551c2a9-7f57-439b-b53d-6db88b07a999
