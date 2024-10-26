@@ -30,5 +30,6 @@ public class Task {
     private Priority priority;
 
     private Employee employee;
+    @ToString.Exclude
     private Project project;
 }

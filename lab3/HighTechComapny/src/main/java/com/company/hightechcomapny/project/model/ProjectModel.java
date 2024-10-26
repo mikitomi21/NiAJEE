@@ -15,6 +15,7 @@ import java.util.UUID;
 public class ProjectModel {
     private UUID id;
     private String name;
+    private Integer budget;
     @Singular
     private List<Task> tasks;
 }

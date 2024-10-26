@@ -51,4 +51,15 @@ public class TaskInMemoryRepository implements TaskRepository {
     public List<Task> findAll() {
         return store.findAllTasks();
     }
+
+    @Override
+    public List<Task> findAllById(UUID projectId) {
+        if (projectId == null) {
+            System.out.println("TaskInMemoryRepository.findAllById: projectId is null");
+            return List.of(); // Zwracamy pustą listę, gdy projectId jest null
+        }
+        return store.findAllTasks().stream()
+                .filter(task -> task.getProject() != null && projectId.equals(task.getProject().getId()))
+                .toList();
+    }
 }

@@ -103,6 +103,8 @@ public class InitializedData implements ServletContextListener  {
                 .build();
 
 
+        pr1.setTasks(List.of(tsk1));
+        pr2.setTasks(List.of(tsk2));
         employeeService.create(emp1);
         employeeService.create(emp2);
         employeeService.create(emp3);

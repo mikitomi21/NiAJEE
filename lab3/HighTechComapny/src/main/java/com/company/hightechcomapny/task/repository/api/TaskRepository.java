@@ -9,4 +9,6 @@ import java.util.UUID;
 
 public interface TaskRepository extends Repository<Task, UUID> {
     List<Task> findAll();
+
+    List<Task> findAllById(UUID projectId);
 }

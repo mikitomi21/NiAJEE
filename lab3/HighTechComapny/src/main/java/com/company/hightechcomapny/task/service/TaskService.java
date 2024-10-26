@@ -42,4 +42,8 @@ public class TaskService {
         taskRepository.delete(taskRepository.find(id).orElseThrow());
     }
 
+    public void deleteByProjectId(UUID projectId) {
+        List<Task> tasks = taskRepository.findAllById(projectId);
+        tasks.forEach(task -> delete(task.getId()));
+    }
 }

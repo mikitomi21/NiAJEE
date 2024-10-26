@@ -12,6 +12,7 @@ public class ProjectToModelFunction implements Function<Project, ProjectModel>, 
         return ProjectModel.builder()
                 .id(project.getId())
                 .name(project.getName())
+                .budget(project.getBudget())
                 .tasks(project.getTasks())
                 .build();
     }

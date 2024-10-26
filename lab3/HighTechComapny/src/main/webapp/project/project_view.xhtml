@@ -1,3 +1,4 @@
+<?xml version="1.0" encoding="UTF-8"?>
 <ui:composition xmlns="http://www.w3.org/1999/xhtml"
                 xmlns:h="jakarta.faces.html"
                 xmlns:ui="jakarta.faces.facelets"
@@ -8,27 +9,70 @@
         <f:viewParam name="id" value="#{projectView.id}" required="true"/>
         <f:viewAction action="#{projectView.init()}"/>
     </f:metadata>
+    <h:messages globalOnly="true" />
 
     <ui:define name="content">
         <article>
             <header><h2><h:outputText value="#{projectView.project.name}"/></h2></header>
             <div class="container">
+
                 <div class="row">
-                    <div class="col-4">
-                        <div class="row mb-2">
-                            <div class="col-6">
-<!--                                Level &amp; Profession-->
-                                siema
+                    <div class="col-12 mb-3">
+                        <div class="row">
+                            <div class="col-12">
+                                <strong>Name:</strong>
                             </div>
-                            <div class="col-6">
-<!--                                <h:outputText value="#{characterView.character.profession}"/>-->
-<!--                                level-->
-<!--                                <h:outputText value="#{characterView.character.level}"/>-->
-                                siema
+                            <div class="col-12">
+                                <h:outputText value="#{projectView.project.name}"/>
                             </div>
                         </div>
                     </div>
                 </div>
+
+                <div class="row">
+                    <div class="col-12 mb-3">
+                        <div class="row">
+                            <div class="col-12">
+                                <strong>Budget:</strong>
+                            </div>
+                            <div class="col-12">
+                                <h:outputText value="#{projectView.project.budget}"/>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-12 mb-3">
+                        <div class="row">
+                            <div class="col-12">
+                                <strong>Tasks:</strong>
+                            </div>
+                            <ui:repeat value="#{projectView.project.tasks}" var="task">
+                                <div class="col-12 mb-2">
+                                    <div class="row">
+                                        <div class="col-4">
+                                            <h:outputText value="#{task.description}" />
+                                            <f:facet name="header">Delete</f:facet>
+                                            <h:form>
+                                                <h:commandButton styleClass="btn" value="Delete"
+                                                                 action="#{projectView.deleteTask(task)}"/>
+                                            </h:form>
+                                        </div>
+<!--                                        <div class="col-4">-->
+<!--                                            <h:outputText value="Assigned to: #{task.employee.name}" />-->
+<!--                                        </div>-->
+<!--                                        <div class="col-4">-->
+<!--                                            <h:outputText value="Deadline: #{task.deadline}" />-->
+<!--                                        </div>-->
+                                    </div>
+                                </div>
+                            </ui:repeat>
+                        </div>
+                    </div>
+                </div>
+
+
             </div>
         </article>
     </ui:define>

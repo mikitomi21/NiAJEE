@@ -13,6 +13,7 @@ import lombok.experimental.SuperBuilder;
 
 import java.io.Serializable;
 import java.util.List;
+import java.util.Objects;
 import java.util.UUID;
 
 @Getter
@@ -21,11 +22,30 @@ import java.util.UUID;
 @NoArgsConstructor
 @AllArgsConstructor(access = AccessLevel.PRIVATE)
 @ToString
-@EqualsAndHashCode
+@EqualsAndHashCode(onlyExplicitlyIncluded = true)
 public class Project {
     private UUID id;
     private String name;
     private Integer budget;
 
-    private List<Task> tasks;
+    @ToString.Exclude
+    private List<Task> tasks;  // w klasie Project
+
+    @Override
+    public String toString() {
+        return "Project{id=" + id + ", name='" + name + "', budget=" + budget + "}";
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(id);
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Project project = (Project) o;
+        return Objects.equals(id, project.id);
+    }
 }

@@ -8,6 +8,7 @@ import com.company.hightechcomapny.project.model.ProjectModel;
 import com.company.hightechcomapny.project.service.ProjectService;
 import com.company.hightechcomapny.task.dto.GetTaskResponse;
 import com.company.hightechcomapny.task.entity.Priority;
+import com.company.hightechcomapny.task.entity.Task;
 import com.company.hightechcomapny.task.model.TaskCreateModel;
 import com.company.hightechcomapny.task.service.TaskService;
 import jakarta.enterprise.context.Conversation;
@@ -22,6 +23,7 @@ import lombok.extern.java.Log;
 
 import java.io.Serializable;
 import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
 
@@ -108,6 +110,17 @@ public class TaskCreate implements Serializable {
         System.out.println("Wybrany pracownik: " + task.getEmployee().getId());
         System.out.println("Zapisz zadanie: " + task);
 
+        projectService.find(task.getProject().getId()).ifPresent(project -> {
+            List<Task> updatedTasks = new ArrayList<>(project.getTasks()); // Skopiowanie istniejącej listy zadań
+            updatedTasks.add(convertToTask(task)); // Dodanie nowego zadania do listy
+            project.setTasks(updatedTasks); // Ustawienie zaktualizowanej listy w projekcie
+
+            task.setProject(convertToProjectModel(project)); // Ustawienie projektu w zadaniu
+        });
+
+
+
+
         taskService.create(factory.modelToTask().apply(task));
         conversation.end();
         return "/task/task_list.xhtml?faces-redirect=true";
@@ -122,6 +135,19 @@ public class TaskCreate implements Serializable {
         return ProjectModel.builder()
                 .id(project.getId())
                 .name(project.getName())
+                .build();
+    }
+
+    private Task convertToTask (TaskCreateModel taskCreateModel) {
+        if (taskCreateModel == null) {
+            return null;
+        }
+        return Task.builder()
+                .id(taskCreateModel.getId())
+                .description(taskCreateModel.getDescription())
+                .deadline(taskCreateModel.getDeadline())
+                .priority(taskCreateModel.getPriority())
+                .employee(taskCreateModel.getEmployee())
                 .build();
     }
 
