@@ -15,45 +15,56 @@
             <header><h2><h:outputText value="#{taskView.task.description}"/></h2></header>
             <div class="container">
                 <div class="row">
-                    <div class="col-4">
-                        <div class="row mb-2">
-                            <div class="col-6">
-                                Project
+                    <div class="col-12 mb-3">
+                        <div class="row">
+                            <div class="col-12">
+                                <strong>Project:</strong>
                             </div>
-                            <div class="col-6">
-                                <h:outputText value="#{characterView.task.project}"/>
+                            <div class="col-12">
+                                <h:outputText value="#{taskView.task.project}"/>
                             </div>
                         </div>
                     </div>
 
-                    <div class="col-4">
-                        <div class="row mb-2">
-                            <div class="col-6">
-                                Description
+                    <div class="col-12 mb-3">
+                        <div class="row">
+                            <div class="col-12">
+                                <strong>Employee:</strong>
                             </div>
-                            <div class="col-6">
+                            <div class="col-12">
+                                <h:outputText value="#{taskView.task.employee}"/>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-12 mb-3">
+                        <div class="row">
+                            <div class="col-12">
+                                <strong>Description:</strong>
+                            </div>
+                            <div class="col-12">
                                 <h:outputText value="#{taskView.task.description}"/>
                             </div>
                         </div>
                     </div>
 
-                    <div class="col-4">
-                        <div class="row mb-2">
-                            <div class="col-6">
-                                Deadline
+                    <div class="col-12 mb-3">
+                        <div class="row">
+                            <div class="col-12">
+                                <strong>Deadline:</strong>
                             </div>
-                            <div class="col-6">
+                            <div class="col-12">
                                 <h:outputText value="#{taskView.task.deadline}"/>
                             </div>
                         </div>
                     </div>
 
-                    <div class="col-4">
-                        <div class="row mb-2">
-                            <div class="col-6">
-                                Priority
+                    <div class="col-12 mb-3">
+                        <div class="row">
+                            <div class="col-12">
+                                <strong>Priority:</strong>
                             </div>
-                            <div class="col-6">
+                            <div class="col-12">
                                 <h:outputText value="#{taskView.task.priority}"/>
                             </div>
                         </div>

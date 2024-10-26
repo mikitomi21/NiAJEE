@@ -1,5 +1,6 @@
 package com.company.hightechcomapny.task.model;
 import com.company.hightechcomapny.employee.entity.Employee;
+import com.company.hightechcomapny.employee.model.EmployeeModel;
 import com.company.hightechcomapny.project.entity.Project;
 import com.company.hightechcomapny.project.model.ProjectModel;
 import com.company.hightechcomapny.task.entity.Priority;
@@ -22,6 +23,6 @@ public class TaskCreateModel {
     private LocalDate deadline;
     private Priority priority;
 
-//    private Employee employee;
+    private Employee employee;
     private ProjectModel project;
 }

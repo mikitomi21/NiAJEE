@@ -21,13 +21,19 @@ public class TaskInMemoryRepository implements TaskRepository {
 
     @Override
     public Optional<Task> find(UUID id) {
+        if (id == null) {
+            System.out.println("TaskInMemoryRepository.find: id is null");
+            return Optional.empty(); // lub rzucenie wyjątku
+        }
         return store.findAllTasks().stream()
-                .filter(task -> task.getId().equals(id))
+                .filter(task -> task.getId() != null && task.getId().equals(id)) // sprawdź, czy id nie jest null
                 .findFirst();
     }
 
     @Override
     public void create(Task entity) {
+        System.out.println("TaskInMemoryRepository.create: " + entity);
+        System.out.println("DupaDupa");
         store.createTask(entity);
     }
 

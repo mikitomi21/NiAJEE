@@ -34,6 +34,7 @@ public class TaskService {
     }
 
     public void update(Task task) {
+        System.out.println("TaskService.update called");
         taskRepository.update(task);
     }
 

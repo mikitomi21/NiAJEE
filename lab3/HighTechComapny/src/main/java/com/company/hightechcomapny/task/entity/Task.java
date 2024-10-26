@@ -23,7 +23,6 @@ import java.util.UUID;
 @AllArgsConstructor(access = AccessLevel.PRIVATE)
 @ToString
 @EqualsAndHashCode
-
 public class Task {
     private UUID id;
     private String description;

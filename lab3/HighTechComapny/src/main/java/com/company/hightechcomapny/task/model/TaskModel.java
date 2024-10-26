@@ -16,10 +16,11 @@ import java.util.UUID;
 @EqualsAndHashCode
 
 public class TaskModel {
+    private UUID id;
     private String description;
     private LocalDate deadline;
     private Priority priority;
-
-//    private Employee employee;
+//
+    private String employee;
     private String project;
 }

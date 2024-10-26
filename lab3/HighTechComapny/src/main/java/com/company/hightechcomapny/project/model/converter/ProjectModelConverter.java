@@ -11,8 +11,9 @@ import jakarta.faces.convert.FacesConverter;
 import jakarta.inject.Inject;
 
 import java.util.Optional;
+import java.util.UUID;
 
-@FacesConverter(forClass = ProjectModel.class, managed = true)
+@FacesConverter(value = "projectConverter", forClass = ProjectModel.class, managed = true)
 public class ProjectModelConverter implements Converter<ProjectModel> {
     private final ProjectService service;
     private final ModelFunctionFactory factory;
@@ -28,13 +29,14 @@ public class ProjectModelConverter implements Converter<ProjectModel> {
         if (value == null || value.isBlank()) {
             return null;
         }
-        Optional<Project> project = service.find(value);
+        Optional<Project> project = service.find(UUID.fromString(value));
         return project.map(factory.projectToModel()).orElse(null);
 
     }
 
     @Override
     public String getAsString(FacesContext context, UIComponent component, ProjectModel value) {
-        return value == null ? "" : value.getName();
+        System.out.println("ProjectModelConverter.getAsString called");
+        return value == null ? "" : value.getId().toString();
     }
 }

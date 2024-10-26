@@ -20,8 +20,7 @@ import lombok.SneakyThrows;
 import java.io.InputStream;
 import java.text.SimpleDateFormat;
 import java.time.LocalDate;
-import java.util.Date;
-import java.util.UUID;
+import java.util.*;
 
 @ApplicationScoped
 public class InitializedData implements ServletContextListener  {
@@ -47,23 +46,6 @@ public class InitializedData implements ServletContextListener  {
     @SneakyThrows
     private void init() {
         requestContextController.activate();
-
-        Task tsk1 = Task.builder()
-                .id(UUID.fromString("0001c2a9-7f57-439b-b53d-6db88b07a000"))
-                .description("Add new features")
-                .deadline(LocalDate.of(2024, 12, 11))
-                .priority(Priority.MEDIUM)
-                .build();
-        Task tsk2 = Task.builder()
-                .id(UUID.fromString("0001c2a9-7f57-439b-b53d-6db88b07a111"))
-                .description("Delete old features")
-                .deadline(LocalDate.of(2024, 10, 10))
-                .priority(Priority.HIGH)
-                .build();
-        taskService.create(tsk1);
-        taskService.create(tsk2);
-        System.out.println(tsk1);
-
         Employee emp1 = Employee.builder()
                 .id(UUID.fromString("81e1c2a9-7f57-439b-b53d-6db88b07a000"))
                 .name("Jakub")
@@ -89,24 +71,48 @@ public class InitializedData implements ServletContextListener  {
                 .picture("/images/basia.jpg")
                 .build();
 
-        employeeService.create(emp1);
-        employeeService.create(emp2);
-        employeeService.create(emp3);
-        employeeService.create(emp4);
 
         Project pr1 = Project.builder()
                 .id(UUID.fromString("5551c2a9-7f57-439b-b53d-6db88b07a000"))
                 .name("Web API")
                 .budget(100000)
+                .tasks(Collections.emptyList())
                 .build();
         Project pr2 = Project.builder()
                 .id(UUID.fromString("5551c2a9-7f57-439b-b53d-6db88b07a111"))
                 .name("Scrapper")
                 .budget(3000)
+                .tasks(Collections.emptyList())
                 .build();
+
+        Task tsk1 = Task.builder()
+                .id(UUID.fromString("0001c2a9-7f57-439b-b53d-6db88b07a000"))
+                .description("Add new features")
+                .deadline(LocalDate.of(2024, 12, 11))
+                .priority(Priority.MEDIUM)
+                .project(pr1)
+                .employee(emp1)
+                .build();
+        Task tsk2 = Task.builder()
+                .id(UUID.fromString("0001c2a9-7f57-439b-b53d-6db88b07a111"))
+                .description("Delete old features")
+                .deadline(LocalDate.of(2024, 10, 10))
+                .priority(Priority.HIGH)
+                .project(pr2)
+                .employee(emp2)
+                .build();
+
+
+        employeeService.create(emp1);
+        employeeService.create(emp2);
+        employeeService.create(emp3);
+        employeeService.create(emp4);
 
         projectService.create(pr1);
         projectService.create(pr2);
+
+        taskService.create(tsk1);
+        taskService.create(tsk2);
 
         requestContextController.deactivate();
     }

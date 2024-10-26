@@ -1,6 +1,8 @@
 package com.company.hightechcomapny.project.model;
+import com.company.hightechcomapny.task.entity.Task;
 import lombok.*;
 
+import java.util.List;
 import java.util.UUID;
 
 @Getter
@@ -13,4 +15,6 @@ import java.util.UUID;
 public class ProjectModel {
     private UUID id;
     private String name;
+    @Singular
+    private List<Task> tasks;
 }

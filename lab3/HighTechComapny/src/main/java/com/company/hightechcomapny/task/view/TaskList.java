@@ -29,6 +29,6 @@ public class TaskList {
 
     public String deleteAction(TasksModel.Task task) {
         service.delete(task.getId());
-        return "task-list?faces-redirect=true";
+        return "task_list?faces-redirect=true";
     }
 }

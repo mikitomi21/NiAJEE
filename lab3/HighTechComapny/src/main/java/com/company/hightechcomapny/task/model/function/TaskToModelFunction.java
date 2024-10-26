@@ -13,6 +13,7 @@ public class TaskToModelFunction implements Function<Task, TaskModel>, Serializa
                 .description(task.getDescription())
                 .deadline(task.getDeadline())
                 .priority(task.getPriority())
+                .employee(task.getEmployee().getName())
                 .project(task.getProject().getName())
                 .build();
     }
