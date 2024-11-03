@@ -124,6 +124,14 @@ GET http://localhost:9080/hightechcomapny/api/projects/5551c2a9-7f57-439b-b53d-6
 
 ###
 
+GET http://localhost:9080/hightechcomapny/api/projects/5551c2a9-7f57-439b-b53d-6db88b07a000/tasks/
+
+###
+
+GET http://localhost:9080/hightechcomapny/api/projects/5551c2a9-7f57-439b-b53d-6db88b07a000/tasks/0001c2a9-7f57-439b-b53d-6db88b07a000
+
+###
+
 
 PUT http://localhost:9080/hightechcomapny/api/projects/5551c2a9-7f57-439b-b53d-6db88b07a999
 Content-Type: application/json

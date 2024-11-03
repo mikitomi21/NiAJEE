@@ -24,6 +24,12 @@ public interface TaskController {
     @Produces(MediaType.APPLICATION_JSON)
     GetTasksResponse getProjectTasks(@PathParam("id") UUID id);
 
+    @GET
+    @Path("/projects/{id1}/tasks/{id2}")
+    @Produces(MediaType.APPLICATION_JSON)
+    GetTaskResponse getProjectTasks(@PathParam("id1") UUID projectId,
+                                     @PathParam("id2") UUID taskId);
+
     @PUT
     @Path("/tasks/{id}")
     @Produces(MediaType.APPLICATION_JSON)

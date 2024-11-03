@@ -63,6 +63,13 @@ public class TaskRestController implements TaskController {
     }
 
     @Override
+    public GetTaskResponse getProjectTasks(UUID projectId, UUID taskId) {
+        return service.findByProjectAndTask(projectId, taskId)
+                .map(factory.taskToResponse())
+                .orElseThrow(() -> new RuntimeException("Task not found"));
+    }
+
+    @Override
     public void putTask(UUID id, PutTaskRequest request) {
         try {
             service.create(factory.requestToTask().apply(id, request));

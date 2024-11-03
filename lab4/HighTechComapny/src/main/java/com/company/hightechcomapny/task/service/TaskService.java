@@ -52,4 +52,11 @@ public class TaskService {
     public Optional<List<Task>> findAllByProject(UUID id) {
         return projectRepository.find(id).map(taskRepository::findAllByProject);
     }
+
+    public Optional<Task> findByProjectAndTask(UUID projectId, UUID taskId) {
+        return projectRepository.find(projectId)
+                .flatMap(project -> taskRepository.find(taskId)
+                        .filter(task -> task.getProject().getId().equals(projectId))
+                );
+    }
 }
