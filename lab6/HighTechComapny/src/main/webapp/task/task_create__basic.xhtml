@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:h="jakarta.faces.html"
+                xmlns:ui="jakarta.faces.facelets"
+                xmlns:f="jakarta.faces.core"
+                template="/WEB-INF/template/main.xhtml">
+
+    <f:metadata>
+        <f:viewAction action="#{taskCreate.init()}"/>
+    </f:metadata>
+    <h:messages styleClass="error-message" />
+    <ui:define name="content">
+        <article>
+            <header><h2>Create Task - Basic Information</h2></header>
+            <h:form styleClass="container" enctype="multipart/form-data">
+                <div class="row">
+                    <div class="col-4 p-2">
+                        <div class="form-outline">
+                            <h:outputLabel for="description" value="Description:" styleClass="form-label"/>
+                            <h:inputText id="description" value="#{taskCreate.task.description}" styleClass="form-control"/>
+                        </div>
+                    </div>
+
+                    <div class="col-4 p-2">
+                        <div class="form-outline">
+                            <h:outputLabel for="project" value="Project:" styleClass="form-label"/>
+                            <h:selectOneMenu id="project" value="#{taskCreate.task.project.id}" styleClass="form-control">
+                                <f:selectItems value="#{taskCreate.projects}" var="project" itemValue="#{project.id}" itemLabel="#{project.name}" />
+                            </h:selectOneMenu>
+                        </div>
+                    </div>
+
+                    <div class="col-4 p-2">
+                        <div class="form-outline">
+                            <h:outputLabel for="employee" value="Employee:" styleClass="form-label"/>
+                            <h:selectOneMenu id="employee" value="#{taskCreate.task.employee.id}" styleClass="form-control">
+                                <f:selectItems value="#{taskCreate.employees}" var="employee" itemValue="#{employee.id}" itemLabel="#{employee.name}" />
+                            </h:selectOneMenu>
+                        </div>
+                    </div>
+
+                    <div class="col-4 p-2">
+                        <div class="form-outline">
+                            <h:outputLabel for="priority" value="Priority:" styleClass="form-label"/>
+                            <h:selectOneMenu id="priority" value="#{taskCreate.task.priority}" styleClass="form-control">
+                                <f:selectItems value="#{taskCreate.priorities}" var="priority" itemValue="#{priority}" itemLabel="#{priority}" />
+                            </h:selectOneMenu>
+                        </div>
+                    </div>
+
+                    <div class="col-4 p-2">
+                        <div class="form-outline">
+                            <h:outputLabel for="deadline" value="Deadline:" styleClass="form-label"/>
+                            <h:inputText id="deadline" value="#{taskCreate.task.deadline}" styleClass="form-control"
+                                         required="true" requiredMessage="Deadline is required."
+                                         converter="localDateConverter"/>
+                        </div>
+                    </div>
+
+                </div>
+
+                <div class="row">
+                    <div class="col-2 p-2 text-center">
+                        <h:commandButton styleClass="btn btn-primary" value="Create" action="#{taskCreate.saveAction()}"/>
+                    </div>
+                    <div class="col-2 p-2 text-center">
+                        <h:commandButton styleClass="btn btn-secondary" value="Cancel" action="#{taskCreate.cancelAction()}"/>
+                    </div>
+                </div>
+            </h:form>
+        </article>
+    </ui:define>
+
+</ui:composition>
