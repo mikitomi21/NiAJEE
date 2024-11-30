@@ -1,0 +1,18 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:h="jakarta.faces.html"
+                xmlns:ui="jakarta.faces.facelets"
+                xmlns:f="jakarta.faces.core"
+                template="/WEB-INF/template/main.xhtml">
+
+    <ui:define name="content">
+        <f:loadBundle var="msg" basename="com.company.hightechcomapny.view.authentication.view.i18n.messages"/>
+        <article class="">
+            <header>
+                <h2>#{msg.home}</h2>
+            </header>
+            <section>
+                <p>#{msg.home_text}</p>
+            </section>
+        </article>
+    </ui:define>
+</ui:composition>

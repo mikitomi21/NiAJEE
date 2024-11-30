@@ -1,5 +1,18 @@
+admin-service:siema
+Authorization: Basic RXdpazoxMj1=
+
+Jakub:siema
+Authorization: Basic RXdpazoxMj2=
+
+Michal:siema
+Authorization: Basic RXdpazoxMj3=
+
+
+###
+
+// @no-cookie-jar
 GET http://localhost:9080/hightechcomapny/api/employees
-Authorization: Basic a2V2aW46dXNlcnVzZXI=
+Authorization: Basic RXdpazoxMj1=
 
 ###
 

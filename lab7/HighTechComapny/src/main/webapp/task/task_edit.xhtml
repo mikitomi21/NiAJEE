@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:h="jakarta.faces.html"
+                xmlns:ui="jakarta.faces.facelets"
+                xmlns:f="jakarta.faces.core"
+                template="/WEB-INF/template/main.xhtml">
+
+    <f:metadata>
+        <f:viewParam name="id" value="#{taskEdit.id}" required="true"/>
+        <f:viewAction action="#{taskEdit.init()}"/>
+    </f:metadata>
+    <h:messages styleClass="error-messages" globalOnly="true" />
+
+    <ui:define name="content">
+        <article>
+            <header><h2>Edit task info</h2></header>
+            <h:form styleClass="container" enctype="multipart/form-data">
+                <div class="row">
+                    <div class="col-4 p-2">
+                        <div class="form-outline">
+                            <h:outputLabel for="description" value="Description:" styleClass="form-label"/>
+                            <h:inputText id="description" value="#{taskEdit.task.description}" styleClass="form-control"/>
+                        </div>
+                    </div>
+
+                    <div class="col-4 p-2">
+                        <div class="form-outline">
+                            <h:outputLabel for="project" value="Project:" styleClass="form-label"/>
+                            <h:selectOneMenu id="project" value="#{taskEdit.task.project.id}" styleClass="form-control">
+                                <f:selectItems value="#{taskEdit.projects}" var="project" itemValue="#{project.id}" itemLabel="#{project.name}" />
+                            </h:selectOneMenu>
+                        </div>
+                    </div>
+
+                    <div class="col-4 p-2">
+                        <div class="form-outline">
+                            <h:outputLabel for="employee" value="Employee:" styleClass="form-label"/>
+                            <h:selectOneMenu id="employee" value="#{taskEdit.task.employee.id}" styleClass="form-control">
+                                <f:selectItems value="#{taskEdit.employees}" var="employee" itemValue="#{employee.id}" itemLabel="#{employee.name}" />
+                            </h:selectOneMenu>
+                        </div>
+                    </div>
+
+                    <div class="col-4 p-2">
+                        <div class="form-outline">
+                            <h:outputLabel for="deadline" value="Deadline:" styleClass="form-label"/>
+                            <h:inputText id="deadline" value="#{taskEdit.task.deadline}" styleClass="form-control"
+                                         required="true" requiredMessage="Deadline is required."
+                                         converter="localDateConverter"/>
+                        </div>
+                    </div>
+
+<!--                    <div class="col-4 p-2">-->
+<!--                        <div class="form-outline">-->
+<!--                            <h:outputLabel for="employee" value="Employee:" styleClass="form-label"/>-->
+<!--                            <h:selectOneMenu id="employee" value="#{taskEdit.task.employee.name}" styleClass="form-control">-->
+<!--                                <f:selectItems value="#{taskEdit.employees}" var="emp" itemValue="#{emp.id}" itemLabel="#{emp.name}" />-->
+<!--                            </h:selectOneMenu>-->
+<!--                        </div>-->
+<!--                    </div>-->
+
+<!--                    <ui:repeat value="#{taskEdit.projects}" var="project">-->
+<!--                        <div class="form-check">-->
+<!--                            <h:selectOneRadio id="radioId"-->
+<!--                                              value="#{taskEdit.task.project.name}" >-->
+<!--                                <f:selectItem itemValue="#{project}" itemLabel="#{project.name}"/>-->
+<!--                            </h:selectOneRadio>-->
+<!--                        </div>-->
+<!--                    </ui:repeat>-->
+
+                    <div class="col-4 p-2">
+                        <div class="form-outline">
+                            <h:outputLabel for="priority" value="Priority:" styleClass="form-label"/>
+                            <h:selectOneMenu id="priority" value="#{taskEdit.task.priority}" styleClass="form-control">
+                                <f:selectItems value="#{taskEdit.priorities}" var="priority" itemValue="#{priority}" itemLabel="#{priority}" />
+                            </h:selectOneMenu>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-2 p-2 text-center">
+                        <h:commandButton styleClass="btn btn-primary" value="Update" action="#{taskEdit.saveAction()}"/>
+                    </div>
+                    <div class="col-2 p-2 text-center">
+                        <h:commandButton styleClass="btn btn-secondary" type="reset" value="Reset"/>
+                    </div>
+                </div>
+            </h:form>
+        </article>
+    </ui:define>
+
+</ui:composition>
