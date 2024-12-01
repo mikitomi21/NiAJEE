@@ -76,6 +76,7 @@ public class EmployeeLogin {
 
     private HttpServletResponse extractResponseFromFacesContext() {
         System.out.println("Siema321");
+        System.out.println(facesContext.getExternalContext().isUserInRole("USER"));
         System.out.println(facesContext.getExternalContext().getResponse().getClass().toString());
         return (HttpServletResponse) facesContext.getExternalContext().getResponse();
     }

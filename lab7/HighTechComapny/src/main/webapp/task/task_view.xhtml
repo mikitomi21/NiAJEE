@@ -11,6 +11,7 @@
     </f:metadata>
 
     <ui:define name="content">
+        <f:loadBundle var="msg" basename="com.company.hightechcomapny.view.all.i18n.messages"/>
         <article>
             <header><h2><h:outputText value="#{taskView.task.description}"/></h2></header>
             <div class="container">
@@ -18,7 +19,7 @@
                     <div class="col-12 mb-3">
                         <div class="row">
                             <div class="col-12">
-                                <strong>Project:</strong>
+                                <strong>#{msg.project}:</strong>
                             </div>
                             <div class="col-12">
                                 <h:outputText value="#{taskView.task.project}"/>
@@ -29,7 +30,7 @@
                     <div class="col-12 mb-3">
                         <div class="row">
                             <div class="col-12">
-                                <strong>Employee:</strong>
+                                <strong>#{msg.employee}:</strong>
                             </div>
                             <div class="col-12">
                                 <h:outputText value="#{taskView.task.employee}"/>
@@ -40,7 +41,7 @@
                     <div class="col-12 mb-3">
                         <div class="row">
                             <div class="col-12">
-                                <strong>Description:</strong>
+                                <strong>#{msg.description}:</strong>
                             </div>
                             <div class="col-12">
                                 <h:outputText value="#{taskView.task.description}"/>
@@ -51,7 +52,7 @@
                     <div class="col-12 mb-3">
                         <div class="row">
                             <div class="col-12">
-                                <strong>Deadline:</strong>
+                                <strong>#{msg.deadline}:</strong>
                             </div>
                             <div class="col-12">
                                 <h:outputText value="#{taskView.task.deadline}"/>
@@ -62,7 +63,7 @@
                     <div class="col-12 mb-3">
                         <div class="row">
                             <div class="col-12">
-                                <strong>Priority:</strong>
+                                <strong>#{msg.priority}:</strong>
                             </div>
                             <div class="col-12">
                                 <h:outputText value="#{taskView.task.priority}"/>

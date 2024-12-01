@@ -6,7 +6,7 @@
                 template="/WEB-INF/template/main.xhtml">
 
     <ui:define name="content">
-        <f:loadBundle var="msg" basename="com.company.hightechcomapny.view.projects.i18n.messages"/>
+        <f:loadBundle var="msg" basename="com.company.hightechcomapny.view.all.i18n.messages"/>
         <!--        <h:outputStylesheet library="task"/>&lt;!&ndash; Automatically relocated to head. &ndash;&gt;-->
 
         <article class="text--justified">
@@ -31,7 +31,7 @@
                     <h:form>
                         <h:commandButton styleClass="btn" value="#{msg.delete}"
                                          action="#{projectList.deleteAction(project)}">
-
+<!--                                         rendered="#{facesContext.externalContext.isUserInRole('admin')}">-->
                             <f:ajax execute="@this" render=":projectTable"/>
                         </h:commandButton>
                     </h:form>
