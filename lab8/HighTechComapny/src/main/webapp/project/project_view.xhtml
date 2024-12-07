@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:h="jakarta.faces.html"
+                xmlns:ui="jakarta.faces.facelets"
+                xmlns:f="jakarta.faces.core"
+                template="/WEB-INF/template/main.xhtml">
+
+    <f:metadata>
+        <f:viewParam name="id" value="#{projectView.id}" required="true"/>
+        <f:viewAction action="#{projectView.init()}"/>
+    </f:metadata>
+    <h:messages globalOnly="true" />
+
+    <ui:define name="content">
+        <f:loadBundle var="msg" basename="com.company.hightechcomapny.view.all.i18n.messages"/>
+        <article>
+            <header><h2><h:outputText value="#{projectView.project.name}"/></h2></header>
+            <div class="container">
+
+                <div class="row">
+                    <div class="col-12 mb-3">
+                        <div class="row">
+                            <div class="col-12">
+                                <strong>#{msg.name}:</strong>
+                            </div>
+                            <div class="col-12">
+                                <h:outputText value="#{projectView.project.name}"/>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-12 mb-3">
+                        <div class="row">
+                            <div class="col-12">
+                                <strong>#{msg.budget}:</strong>
+                            </div>
+                            <div class="col-12">
+                                <h:outputText value="#{projectView.project.budget}"/>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-12 mb-3">
+                        <div class="row">
+                            <div class="col-12">
+                                <strong>#{msg.tasks}:</strong>
+                            </div>
+                            <ui:repeat value="#{projectView.project.tasks}" var="task">
+                                <div class="col-12 mb-2">
+                                    <div class="row">
+                                        <div class="col-4">
+                                            <h:outputText value="#{task.description}" />
+                                            <f:facet name="header">Delete</f:facet>
+                                            <h:form>
+                                                <h:commandButton styleClass="btn" value="#{msg.delete}"
+                                                                 action="#{projectView.deleteTask(task)}"/>
+                                            </h:form>
+                                        </div>
+<!--                                        <div class="col-4">-->
+<!--                                            <h:outputText value="Assigned to: #{task.employee.name}" />-->
+<!--                                        </div>-->
+<!--                                        <div class="col-4">-->
+<!--                                            <h:outputText value="Deadline: #{task.deadline}" />-->
+<!--                                        </div>-->
+                                    </div>
+                                </div>
+                            </ui:repeat>
+                        </div>
+                    </div>
+                </div>
+
+
+            </div>
+        </article>
+    </ui:define>
+
+</ui:composition>

@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:h="jakarta.faces.html"
+                xmlns:ui="jakarta.faces.facelets"
+                xmlns:f="jakarta.faces.core"
+                template="/WEB-INF/template/main.xhtml">
+
+    <ui:define name="content">
+        <f:loadBundle var="msg" basename="com.company.hightechcomapny.view.all.i18n.messages"/>
+<!--        <h:outputStylesheet library="task"/>&lt;!&ndash; Automatically relocated to head. &ndash;&gt;-->
+
+        <article class="text--justified">
+            <header><h2>#{msg.tasks}</h2></header>
+
+            <h:dataTable value="#{taskList.tasks.tasks}" var="task"
+                         styleClass="table align-middle mb-0 bg-white" headerClass="bg-light">
+                <h:column>
+                    <f:facet name="header">#{msg.description}</f:facet>
+                    <h:outputText value="#{task.description}"/>
+                </h:column>
+
+                <h:column>
+                    <f:facet name="header">Version</f:facet>
+                    <h:outputText value="#{task.version}"/>
+                </h:column>
+
+                <h:column>
+                    <f:facet name="header">ID</f:facet>
+                    <h:outputText value="#{task.id}"/>
+                </h:column>
+
+                <h:column>
+                    <f:facet name="header">Created</f:facet>
+                    <h:outputText value="#{task.creationDateTime}">
+                        <f:convertDateTime type="localDateTime" pattern="yyyy-MM-dd HH:mm"/>
+                    </h:outputText>
+                </h:column>
+
+
+                <h:column>
+                    <f:facet name="header">#{msg.view}</f:facet>
+                    <h:link outcome="/task/task_view.xhtml" value="#{msg.view}">
+                        <f:param name="id" value="#{task.id}"/>
+                    </h:link>
+                </h:column>
+
+                <h:column>
+                    <f:facet name="header">#{msg.edit}</f:facet>
+                    <h:link outcome="/task/task_edit.xhtml" value="#{msg.edit}">
+                        <f:param name="id" value="#{task.id}"/>
+                    </h:link>
+                </h:column>
+
+                <h:column>
+                    <f:facet name="header">#{msg.delete}</f:facet>
+                    <h:form>
+                        <h:commandButton styleClass="btn" value="#{msg.delete}"
+                                         action="#{taskList.deleteAction(task)}"/>
+                    </h:form>
+                </h:column>
+
+                <f:facet name="footer">
+                    <h:button styleClass="btn" outcome="/task/task_create__basic.xhtml"
+                              value="#{msg.add_task}"/>
+                </f:facet>
+            </h:dataTable>
+        </article>
+    </ui:define>
+
+</ui:composition>

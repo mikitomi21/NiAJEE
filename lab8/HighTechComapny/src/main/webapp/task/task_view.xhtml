@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:h="jakarta.faces.html"
+                xmlns:ui="jakarta.faces.facelets"
+                xmlns:f="jakarta.faces.core"
+                template="/WEB-INF/template/main.xhtml">
+
+    <f:metadata>
+        <f:viewParam name="id" value="#{taskView.id}" required="true"/>
+        <f:viewAction action="#{taskView.init()}"/>
+    </f:metadata>
+
+    <ui:define name="content">
+        <f:loadBundle var="msg" basename="com.company.hightechcomapny.view.all.i18n.messages"/>
+        <article>
+            <header><h2><h:outputText value="#{taskView.task.description}"/></h2></header>
+            <div class="container">
+                <div class="row">
+                    <div class="col-12 mb-3">
+                        <div class="row">
+                            <div class="col-12">
+                                <strong>#{msg.project}:</strong>
+                            </div>
+                            <div class="col-12">
+                                <h:outputText value="#{taskView.task.project}"/>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-12 mb-3">
+                        <div class="row">
+                            <div class="col-12">
+                                <strong>#{msg.employee}:</strong>
+                            </div>
+                            <div class="col-12">
+                                <h:outputText value="#{taskView.task.employee}"/>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-12 mb-3">
+                        <div class="row">
+                            <div class="col-12">
+                                <strong>#{msg.description}:</strong>
+                            </div>
+                            <div class="col-12">
+                                <h:outputText value="#{taskView.task.description}"/>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-12 mb-3">
+                        <div class="row">
+                            <div class="col-12">
+                                <strong>#{msg.deadline}:</strong>
+                            </div>
+                            <div class="col-12">
+                                <h:outputText value="#{taskView.task.deadline}"/>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-12 mb-3">
+                        <div class="row">
+                            <div class="col-12">
+                                <strong>#{msg.priority}:</strong>
+                            </div>
+                            <div class="col-12">
+                                <h:outputText value="#{taskView.task.priority}"/>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </article>
+    </ui:define>
+
+</ui:composition>
